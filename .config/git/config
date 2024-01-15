@@ -1,0 +1,27 @@
+# This is Git's per-user configuration file.
+[user]
+# This is set in ~/.config/git/.gitconfig_local as spesified in https://stackoverflow.com/questions/42553685/setting-git-username-and-email-without-using-gitconfig
+[include]
+    path = ~/.config/git/config_local
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[color]
+	ui = auto
+[diff]
+	tool = vimdiff
+	submodule = log
+[difftool]
+	prompt = false
+[core]
+	excludesFile = ~/.config/git/gitignore
+[credential]
+	helper = cache --timeout=3600
+#[url "git@github.com:"]
+#	insteadOf = https://github.com/
+[pull]
+	ff = only
+[init]
+	defaultBranch = master

@@ -1,0 +1,26 @@
+# mac specific
+mac list DNS servers: scutil --dns
+
+# grep specific
+invert grep selection: grep -v
+use grep extended regex: grep -E
+make grep case insensitive: grep -i
+make grep show only matches: grep -o
+
+# shell specific
+redirect to multiple commands: seq 3 | tee >(xargs echo) | cat -n
+the proper way to do shell variables: varname=true; [ "$varname" = true ]
+# https://unix.stackexchange.com/questions/176001/how-can-i-list-all-shell-variables
+list all shell variables: typeset
+# https://superuser.com/questions/563939/save-command-to-history-without-executing-in-bash
+keep a command from running, but still have it added to the history by appending: !#%:p
+to comment out a line esc - # will comment, add to history, then give you a new prompt
+to echo variable value or nope: echo ${FOO-nope}
+
+# vim specific
+the tabs of a file can be converted to tabstop with the :retab command
+
+# relating to tips
+add tip: addtip TIP
+edit tip file: vimtip
+print [N] tip(s): tip [N]

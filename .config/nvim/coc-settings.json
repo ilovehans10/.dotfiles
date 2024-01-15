@@ -1,0 +1,37 @@
+{
+  "languageserver": {
+    "efm": {
+      "command": "efm-langserver",
+      "args": [],
+      "filetypes": ["vim", "markdown", "Ruby"]
+    },
+    "ccls": {
+      "command": "ccls",
+      "filetypes": [
+        "c",
+        "cpp",
+        "objc",
+        "objcpp"
+      ],
+      "rootPatterns": [
+        ".ccls",
+        "compile_commands.json",
+        ".vim/",
+        ".git/",
+        ".hg/"
+      ],
+      "initializationOptions": {
+        "cache": {
+          "directory": "/tmp/ccls"
+        }
+      }
+    }
+  },
+  "Lua.workspace.library": [ "/usr/local/share/nvim/runtime/lua", "/usr/local/share/nvim/runtime/lua/vim", "/usr/local/share/nvim/runtime/lua/vim/lsp" ],
+  "Lua.diagnostics.globals": ["vim"],
+  "rust-analyzer.diagnostics.disabled": ["unresolved-proc-macro"],
+  "rust-analyzer.procMacro.enable": false,
+  "rust-analyzer.updates.prompt": false,
+  "suggest.noselect": true,
+  "coc.preferences.jumpCommand": "tab drop"
+}
