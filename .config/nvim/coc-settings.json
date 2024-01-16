@@ -32,6 +32,8 @@
   "rust-analyzer.diagnostics.disabled": ["unresolved-proc-macro"],
   "rust-analyzer.procMacro.enable": false,
   "rust-analyzer.updates.prompt": false,
+  "rust-analyzer.checkOnSave": true,
+  "rust-analyzer.check.command": "clippy",
   "suggest.noselect": true,
   "coc.preferences.jumpCommand": "tab drop"
 }
