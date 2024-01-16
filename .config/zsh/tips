@@ -15,7 +15,7 @@ list all shell variables: typeset
 # https://superuser.com/questions/563939/save-command-to-history-without-executing-in-bash
 keep a command from running, but still have it added to the history by appending: !#%:p
 to comment out a line esc - # will comment, add to history, then give you a new prompt
-to echo variable value or nope: echo ${FOO-nope}
+to echo variable value or nope if variable is not set: echo ${FOO-nope}
 
 # vim specific
 the tabs of a file can be converted to tabstop with the :retab command

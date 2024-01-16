@@ -7,6 +7,8 @@ case $OS in
   Darwin)
     # Set PATH, MANPATH, etc., for Homebrew.
     eval "$(/opt/homebrew/bin/brew shellenv)";;
+  Linux)
+    true;;
 esac
 
 # Default programs
@@ -28,10 +30,9 @@ export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 # Default Locales
+export LANGUAGE="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
-
-# Use XDG for brew bundle
-export HOMEBREW_BUNDLE_FILE="$HOME/.config/brew/Brewfile"
+export LC_CTYPE="en_US.UTF-8"
 
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME/.config"
