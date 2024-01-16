@@ -7,7 +7,7 @@ local option = vim.opt
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 -- set variable for vimrc location
-vim.g.vimrc = vim.fn.expand('<sfile>:p:h')
+vim.g.vimrc = vim.fn.expand('<sfile>:p')
 
 
 -- many of my options (TODO sort)
@@ -28,7 +28,6 @@ option.scrolloff = 5 -- number of lines to keep the cursor from the edges
 option.linebreak = true -- makes long lines wrap at characters in breakat
 option.mouse = "a" -- allow for all mouse functionality
 option.directory = {".", "~/tmp", "/var/tmp", "/tmp"} -- swapfiles are made in the first directory possible
--- option.autochdir = true -- automatically change to the directory of the current buffer
 option.splitbelow = true -- open horizontal splits on the bottom
 option.splitright = true -- open vertical splits on the right
 option.undofile = true -- keep a history of modifications to a file for undoing after closing a session
@@ -78,6 +77,7 @@ keyset("n", "<leader>ev", (":tab drop " .. vim.fn.expand('<sfile>:p') .. "<CR>")
 keyset("n", "<leader>ez", "<CMD>tab drop ~/.zshrc<CR>")
 keyset("n", "<leader>s", ":s///g<Left><Left>")
 keyset("n", "<leader>S", ":%s///g<Left><Left>")
+keyset("n", "<leader>f", ":%! rustfmt<CR>")
 keyset("n", "<leader>z", ":set spell!<CR>")
 keyset("n", "<leader>Z", "1z=")
 keyset("n", "<leader>h", ":let @/=\"\"<CR>")
@@ -90,44 +90,23 @@ keyset("t", "<ESC><ESC>", "<C-\\><C-n>")
 
 
 vim.api.nvim_create_augroup("helpbuffer", {})
-vim.api.nvim_create_autocmd("BufEnter", {
-  pattern = "*.txt",
-  group = "helpbuffer",
-  command = "if &buftype == 'help' | vert resize 78 | setlocal nonumber norelativenumber signcolumn=no | wincmd L | endif" })
+vim.api.nvim_create_autocmd( "BufEnter", { pattern = "*.txt", group = "helpbuffer", command = "if &buftype == 'help' | vert resize 78 | setlocal nonumber norelativenumber signcolumn=no | wincmd L | endif" })
 
 vim.api.nvim_create_augroup("myterm", {})
-vim.api.nvim_create_autocmd("TermOpen", {
-  group = "myterm",
-  command = "if &buftype ==# 'terminal' | vert resize 100 | endif" })
-vim.api.nvim_create_autocmd("BufEnter", {
-  group = "myterm",
-  command = "if &buftype ==# 'terminal' | setlocal nonumber norelativenumber nospell signcolumn=no | startinsert | endif" })
+vim.api.nvim_create_autocmd("TermOpen", { group = "myterm", command = "if &buftype ==# 'terminal' | vert resize 100 | endif" })
+vim.api.nvim_create_autocmd("BufEnter", { group = "myterm", command = "if &buftype ==# 'terminal' | setlocal nonumber norelativenumber nospell signcolumn=no | startinsert | endif" })
 
 vim.api.nvim_create_augroup("trailingwhitespace", {})
-vim.api.nvim_create_autocmd("BufWritePre", {
-  group = "trailingwhitespace",
-  command = [[ let save_view = winsaveview() | %s/\s\+$//e | call winrestview(save_view) ]] })
-
-vim.api.nvim_create_augroup("rustfmt", {})
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*.rs",
-  group = "rustfmt",
-  command = "%! rustfmt" })
+vim.api.nvim_create_autocmd("BufWritePre", { group = "trailingwhitespace", command = [[ let save_view = winsaveview() | %s/\s\+$//e | call winrestview(save_view) ]] })
 
 vim.api.nvim_create_augroup("setshiftwidth", {})
-vim.api.nvim_create_autocmd("Filetype", {
-  pattern = "*.py",
-  group = "setshiftwidth",
-  command = [[ setlocal shiftwidth=2 ]] })
+vim.api.nvim_create_autocmd("Filetype", { pattern = "*.py", group = "setshiftwidth", command = [[ setlocal shiftwidth=2 ]] })
 
 vim.api.nvim_create_augroup("changedirectory", {})
-vim.api.nvim_create_autocmd("BufEnter", {
-  pattern = "*",
-  group = "changedirectory",
-  command = [[ silent! lcd %:p:h ]] })
+vim.api.nvim_create_autocmd("BufEnter", { pattern = "*", group = "changedirectory", command = [[ silent! lcd %:p:h ]] })
 
 
- -- install lazy if it's not found
+-- install lazy if it's not found
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -185,10 +164,6 @@ require("lazy").setup({
       function _G.show_docs()
         local cw = vim.fn.expand("<cword>")
         local fname = vim.fn.expand("%:p")
-        --print((vim.fn.index({"vim", "help"}, vim.bo.filetype) >= 0) or (vim.g.vimrc == fname))
-        --print(vim.g.vimrc)
-        --print(fname)
-        print(vim.fn.CocHasProvider('hover'))
         if (vim.fn.index({"vim", "help"}, vim.bo.filetype) >= 0) or (vim.g.vimrc == fname) then
           vim.api.nvim_command("h " .. cw)
         elseif vim.api.nvim_eval("coc#rpc#ready()") then
@@ -210,25 +185,96 @@ require("lazy").setup({
     end,
   },
   {
-    "vim-airline/vim-airline",
-    dependencies = "vim-airline/vim-airline-themes",
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
     config = function()
-      -- turn on airline powerline and tabline
-      vim.g.airline_powerline_fonts = 1
-      vim.g["airline#extensions#tabline#enabled"] = 1
-
-      -- set powerline symbols to be used with airline
-      vim.g.airline_symbols = {linenr = " :", modified = "+", whitespace = "☲", branch = "", ellipsis = "...", paste = "PASTE", maxlinenr = "☰ ", readonly = "", spell = "SPELL", space = " ", dirty = "⚡", colnr = " ℅:", keymap = "Keymap:", crypt = "🔒", notexists = "Ɇ"}
-      vim.g.airline_left_sep = ""
-      vim.g.airline_left_alt_sep = ""
-      vim.g.airline_right_sep = ""
-      vim.g.airline_right_alt_sep = ""
-
-      vim.g.airline_theme = "catppuccin"
+      require('nvim-treesitter.configs').setup {
+        ensure_installed = {"lua", "rust", "vimdoc"},
+        highlight = {
+          enable = true,
+        },
+      }
     end
   },
   {
-    "vim-airline/vim-airline-themes",
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      require('lualine').setup {
+        options = {
+          icons_enabled = true,
+          theme = 'auto',
+          component_separators = { left = '', right = ''},
+          section_separators = { left = '', right = ''},
+          disabled_filetypes = {
+            statusline = {'neo-tree'},
+            winbar = {'neo-tree'},
+          },
+          ignore_focus = {},
+          always_divide_middle = true,
+          globalstatus = false,
+          refresh = {
+            statusline = 1000,
+            tabline = 1000,
+            winbar = 1000,
+          }
+        },
+        sections = {
+          lualine_a = {'mode'},
+          lualine_b = {'branch', 'diff', 'diagnostics'},
+          lualine_c = {'filename'},
+          lualine_x = {'encoding', 'fileformat', 'filetype'},
+          lualine_y = {'selectioncount', 'searchcount', 'progress'},
+          lualine_z = {'location'}
+        },
+        inactive_sections = {
+          lualine_a = {},
+          lualine_b = {},
+          lualine_c = {'filename'},
+          lualine_x = {'location'},
+          lualine_y = {},
+          lualine_z = {}
+        },
+        winbar = {
+          lualine_a = {},
+          lualine_b = {},
+          lualine_c = {},
+          lualine_x = {},
+          lualine_y = {},
+          lualine_z = {}
+        },
+        inactive_winbar = {
+          lualine_a = {},
+          lualine_b = {},
+          lualine_c = {},
+          lualine_x = {},
+          lualine_y = {'diagnostics'},
+          lualine_z = {}
+        },
+        extensions = {}
+      }
+    end
+  },
+  {
+    'akinsho/bufferline.nvim',
+    dependencies = 'nvim-tree/nvim-web-devicons',
+    config = function()
+      require("bufferline").setup{
+        options = {
+          separator_style = 'slant',
+          indicator = {
+            style = 'underline',
+          },
+          offsets = {
+            {
+              filetype = "neo-tree",
+              text = "File Explorer",
+              separator = true -- use a "true" to enable the default, or set your own character
+            }
+          },
+        }
+      }
+    end
   },
   {
     "tmsvg/pear-tree",
@@ -249,8 +295,7 @@ require("lazy").setup({
   {
     "folke/which-key.nvim",
     config = function()
-      require("which-key").setup({
-      })
+      require("which-key").setup({})
     end,
   },
   {
