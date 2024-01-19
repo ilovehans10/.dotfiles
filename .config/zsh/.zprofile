@@ -6,7 +6,8 @@ local OS=$(uname -s)
 case $OS in
   Darwin)
     # Set PATH, MANPATH, etc., for Homebrew.
-    eval "$(/opt/homebrew/bin/brew shellenv)";;
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+    source "/Users/larssonh/.local/share/cargo/env";;
   Linux)
     true;;
 esac
@@ -38,6 +39,7 @@ export LC_CTYPE="en_US.UTF-8"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
+
 #export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 #export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority" # This line will break some DMs.
 export ANDROID_SDK_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/android"
@@ -51,6 +53,7 @@ export KODI_DATA="${XDG_DATA_HOME:-$HOME/.local/share}/kodi"
 export LESSHISTFILE="-"
 export NOTMUCH_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/notmuch-config"
 export PASSWORD_STORE_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/password-store"
+export RUSTUP_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/rustup"
 export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
 export UNISON="${XDG_DATA_HOME:-$HOME/.local/share}/unison"
 export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
