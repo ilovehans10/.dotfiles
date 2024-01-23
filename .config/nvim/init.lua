@@ -11,6 +11,10 @@ vim.g.vimrc = vim.fn.expand('<sfile>:p')
 
 
 -- many of my options (TODO sort)
+option.foldmethod = "expr"
+option.foldexpr = "nvim_treesitter#foldexpr()"
+option.foldminlines = 10
+option.foldnestmax = 3
 option.cursorline = true -- highlight the cursorline based on cursorlineopt
 option.cursorlineopt = "number" -- highlight the linenumber of the cursorline
 option.encoding = "utf-8" -- set default file encoding
