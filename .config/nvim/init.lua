@@ -127,7 +127,7 @@ option.rtp:prepend(lazypath)
 
 require("lazy").setup({
   {
-    "catppuccin/nvim",
+    "catppuccin/nvim", -- A pack of catppuccin themes
     name = "catppuccin",
     priority = 1000,
     config = function()
@@ -189,7 +189,7 @@ require("lazy").setup({
     end,
   },
   {
-    "nvim-treesitter/nvim-treesitter",
+    "nvim-treesitter/nvim-treesitter", -- generate syntax highlighting based on file
     build = ":TSUpdate",
     config = function()
       require('nvim-treesitter.configs').setup {
@@ -201,7 +201,7 @@ require("lazy").setup({
     end
   },
   {
-    'nvim-lualine/lualine.nvim',
+    'nvim-lualine/lualine.nvim', -- lua based statusline
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
       require('lualine').setup {
@@ -260,7 +260,7 @@ require("lazy").setup({
     end
   },
   {
-    'akinsho/bufferline.nvim',
+    'akinsho/bufferline.nvim', -- change tab/buffer to hold more information
     dependencies = 'nvim-tree/nvim-web-devicons',
     config = function()
       require("bufferline").setup{
@@ -281,7 +281,7 @@ require("lazy").setup({
     end
   },
   {
-    "tmsvg/pear-tree",
+    "tmsvg/pear-tree", -- add functionality to automatically place closing symbol
     config = function()
       -- disable automatic mapping
       vim.g.pear_tree_map_special_keys = 0
@@ -297,13 +297,13 @@ require("lazy").setup({
     end
   },
   {
-    "folke/which-key.nvim",
+    "folke/which-key.nvim", -- shows possible keybinds when a key is pressed
     config = function()
       require("which-key").setup({})
     end,
   },
   {
-    "nvim-neo-tree/neo-tree.nvim",
+    "nvim-neo-tree/neo-tree.nvim", -- add a vim file explorer
     event = "VeryLazy",
     branch = "v2.x",
     dependencies = {
@@ -342,13 +342,13 @@ require("lazy").setup({
     end,
   },
   {
-    "mbbill/undotree",
+    "mbbill/undotree", -- add an undotree
     config = function()
       vim.g.undotree_WindowLayout = 3
     end,
   },
   {
-    "gelguy/wilder.nvim",
+    "gelguy/wilder.nvim", -- add better commandline/searchline completion
     config = function()
       local wilder = require("wilder")
       wilder.setup({
