@@ -113,257 +113,257 @@ vim.api.nvim_create_autocmd("BufEnter", { pattern = "*", group = "changedirector
 -- install lazy if it's not found
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
 end
 option.rtp:prepend(lazypath)
 
 
 require("lazy").setup({
-  {
-    "catppuccin/nvim", -- A pack of catppuccin themes
-    name = "catppuccin",
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme "catppuccin-mocha"
-    end
-  },
-  {
-    "airblade/vim-gitgutter", -- show git information in the left gutter
-  },
-  {
-    "preservim/vim-indent-guides", -- color codes indentation levels
-    config = function()
-      vim.g.indent_guides_enable_on_vim_startup = 1
-    end
-  },
-  {
-    "easymotion/vim-easymotion", -- easymotion allows for smarter movement
-  },
-  {
-    "neoclide/coc.nvim", -- coc does completion and snippets
-    branch = "release",
-    config = function()
-      -- set extensions for coc
-      vim.g.coc_global_extensions = {"coc-sh", "coc-rust-analyzer", "coc-lua", "coc-pyright", "coc-json"}
-
-      -- coc setup
-      function _G.check_back_space()
-        local col = vim.fn.col(".") - 1
-        if col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
-          return true
-        else
-          return false
+    {
+        "catppuccin/nvim", -- A pack of catppuccin themes
+        name = "catppuccin",
+        priority = 1000,
+        config = function()
+            vim.cmd.colorscheme "catppuccin-mocha"
         end
-      end
-
-
-      -- function that shows documentation based on file type
-      function _G.show_docs()
-        local cw = vim.fn.expand("<cword>")
-        local fname = vim.fn.expand("%:p")
-        if (vim.fn.index({"vim", "help"}, vim.bo.filetype) >= 0) or (vim.g.vimrc == fname) then
-          vim.api.nvim_command("h " .. cw)
-        elseif vim.api.nvim_eval("coc#rpc#ready()") then
-          vim.fn.CocActionAsync("doHover")
-        else
-          vim.api.nvim_command("!" .. vim.o.keywordprg .. " " .. cw)
-        end
-      end
-      -- vim function that is used by K to show documentation
-      vim.cmd("command -nargs=* ShowDocs lua _G.show_docs()")
-
-
-      vim.api.nvim_create_augroup("CocGroup", {})
-      vim.api.nvim_create_autocmd("CursorHold", {
-        group = "CocGroup",
-        command = "silent call CocActionAsync('highlight')",
-        desc = "Highlight symbol under cursor on CursorHold"
-      })
-    end,
-  },
-  {
-    "nvim-treesitter/nvim-treesitter", -- generate syntax highlighting based on file
-    build = ":TSUpdate",
-    config = function()
-      require('nvim-treesitter.configs').setup {
-        ensure_installed = {"lua", "rust", "vimdoc"},
-        highlight = {
-          enable = true,
-        },
-        indent = {
-            enable = true,
-        }
-      }
-    end
-  },
-  {
-    'nvim-lualine/lualine.nvim', -- lua based statusline
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function()
-      require('lualine').setup {
-        options = {
-          icons_enabled = true,
-          theme = 'auto',
-          component_separators = { left = '', right = ''},
-          section_separators = { left = '', right = ''},
-          disabled_filetypes = {
-            statusline = {'neo-tree'},
-            winbar = {'neo-tree'},
-          },
-          ignore_focus = {},
-          always_divide_middle = true,
-          globalstatus = false,
-          refresh = {
-            statusline = 1000,
-            tabline = 1000,
-            winbar = 1000,
-          }
-        },
-        sections = {
-          lualine_a = {'mode'},
-          lualine_b = {'branch', 'diff', 'diagnostics'},
-          lualine_c = {'filename'},
-          lualine_x = {'encoding', 'fileformat', 'filetype'},
-          lualine_y = {'selectioncount', 'searchcount', 'progress'},
-          lualine_z = {'location'}
-        },
-        inactive_sections = {
-          lualine_a = {},
-          lualine_b = {},
-          lualine_c = {'filename'},
-          lualine_x = {'location'},
-          lualine_y = {},
-          lualine_z = {}
-        },
-        winbar = {
-          lualine_a = {},
-          lualine_b = {},
-          lualine_c = {},
-          lualine_x = {},
-          lualine_y = {},
-          lualine_z = {}
-        },
-        inactive_winbar = {
-          lualine_a = {},
-          lualine_b = {},
-          lualine_c = {},
-          lualine_x = {},
-          lualine_y = {'diagnostics'},
-          lualine_z = {}
-        },
-        extensions = {}
-      }
-    end
-  },
-  {
-    'akinsho/bufferline.nvim', -- change tab/buffer to hold more information
-    dependencies = 'nvim-tree/nvim-web-devicons',
-    config = function()
-      require("bufferline").setup{
-        options = {
-          separator_style = 'slant',
-          indicator = {
-            style = 'underline',
-          },
-          offsets = {
-            {
-              filetype = "neo-tree",
-              text = "File Explorer",
-              separator = true -- use a "true" to enable the default, or set your own character
-            }
-          },
-        }
-      }
-    end
-  },
-  {
-    "tmsvg/pear-tree", -- add functionality to automatically place closing symbol
-    config = function()
-      -- disable automatic mapping
-      vim.g.pear_tree_map_special_keys = 0
-
-      --mappings
-      keyset("i", "<BS>", "<Plug>(PearTreeBackspace)")
-      keyset("i", "<Esc>", "<Plug>(PearTreeFinishExpansion)")
-
-      -- Smart pairs are disabled by default:
-      vim.g.pear_tree_smart_openers = 1
-      vim.g.pear_tree_smart_closers = 1
-      vim.g.pear_tree_smart_backspace = 1
-    end
-  },
-  {
-    "folke/which-key.nvim", -- shows possible keybinds when a key is pressed
-    config = function()
-      require("which-key").setup({})
-    end,
-  },
-  {
-    "nvim-neo-tree/neo-tree.nvim", -- add a vim file explorer
-    event = "VeryLazy",
-    branch = "v2.x",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons",
-      "MunifTanjim/nui.nvim",
     },
-    config = function ()
-      vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+    {
+        "airblade/vim-gitgutter", -- show git information in the left gutter
+    },
+    {
+        "preservim/vim-indent-guides", -- color codes indentation levels
+        config = function()
+            vim.g.indent_guides_enable_on_vim_startup = 1
+        end
+    },
+    {
+        "easymotion/vim-easymotion", -- easymotion allows for smarter movement
+    },
+    {
+        "neoclide/coc.nvim", -- coc does completion and snippets
+        branch = "release",
+        config = function()
+            -- set extensions for coc
+            vim.g.coc_global_extensions = {"coc-sh", "coc-rust-analyzer", "coc-lua", "coc-pyright", "coc-json"}
 
-      -- disable netrw for neotree
-      vim.g.loaded_netrw = 1
-      vim.g.loaded_netrwPlugin = 1
-      require("neo-tree").setup({
-        open_files_do_not_replace_types = { "terminal" },
-        close_if_last_window = true,
-        sources = {
-          "filesystem",
-          "buffers",
-          "git_status",
-          -- "document_symbols", -- I would love to use this but it doesn't work with Coc https://github.com/nvim-neo-tree/neo-tree.nvim/issues/879
+            -- coc setup
+            function _G.check_back_space()
+                local col = vim.fn.col(".") - 1
+                if col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
+                    return true
+                else
+                    return false
+                end
+            end
+
+
+            -- function that shows documentation based on file type
+            function _G.show_docs()
+                local cw = vim.fn.expand("<cword>")
+                local fname = vim.fn.expand("%:p")
+                if (vim.fn.index({"vim", "help"}, vim.bo.filetype) >= 0) or (vim.g.vimrc == fname) then
+                    vim.api.nvim_command("h " .. cw)
+                elseif vim.api.nvim_eval("coc#rpc#ready()") then
+                    vim.fn.CocActionAsync("doHover")
+                else
+                    vim.api.nvim_command("!" .. vim.o.keywordprg .. " " .. cw)
+                end
+            end
+            -- vim function that is used by K to show documentation
+            vim.cmd("command -nargs=* ShowDocs lua _G.show_docs()")
+
+
+            vim.api.nvim_create_augroup("CocGroup", {})
+            vim.api.nvim_create_autocmd("CursorHold", {
+                group = "CocGroup",
+                command = "silent call CocActionAsync('highlight')",
+                desc = "Highlight symbol under cursor on CursorHold"
+            })
+        end,
+    },
+    {
+        "nvim-treesitter/nvim-treesitter", -- generate syntax highlighting based on file
+        build = ":TSUpdate",
+        config = function()
+            require('nvim-treesitter.configs').setup {
+                ensure_installed = {"lua", "rust", "vimdoc"},
+                highlight = {
+                    enable = true,
+                },
+                indent = {
+                    enable = true,
+                }
+            }
+        end
+    },
+    {
+        'nvim-lualine/lualine.nvim', -- lua based statusline
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        config = function()
+            require('lualine').setup {
+                options = {
+                    icons_enabled = true,
+                    theme = 'auto',
+                    component_separators = { left = '', right = ''},
+                    section_separators = { left = '', right = ''},
+                    disabled_filetypes = {
+                        statusline = {'neo-tree'},
+                        winbar = {'neo-tree'},
+                    },
+                    ignore_focus = {},
+                    always_divide_middle = true,
+                    globalstatus = false,
+                    refresh = {
+                        statusline = 1000,
+                        tabline = 1000,
+                        winbar = 1000,
+                    }
+                },
+                sections = {
+                    lualine_a = {'mode'},
+                    lualine_b = {'branch', 'diff', 'diagnostics'},
+                    lualine_c = {'filename'},
+                    lualine_x = {'encoding', 'fileformat', 'filetype'},
+                    lualine_y = {'selectioncount', 'searchcount', 'progress'},
+                    lualine_z = {'location'}
+                },
+                inactive_sections = {
+                    lualine_a = {},
+                    lualine_b = {},
+                    lualine_c = {'filename'},
+                    lualine_x = {'location'},
+                    lualine_y = {},
+                    lualine_z = {}
+                },
+                winbar = {
+                    lualine_a = {},
+                    lualine_b = {},
+                    lualine_c = {},
+                    lualine_x = {},
+                    lualine_y = {},
+                    lualine_z = {}
+                },
+                inactive_winbar = {
+                    lualine_a = {},
+                    lualine_b = {},
+                    lualine_c = {},
+                    lualine_x = {},
+                    lualine_y = {'diagnostics'},
+                    lualine_z = {}
+                },
+                extensions = {}
+            }
+        end
+    },
+    {
+        'akinsho/bufferline.nvim', -- change tab/buffer to hold more information
+        dependencies = 'nvim-tree/nvim-web-devicons',
+        config = function()
+            require("bufferline").setup{
+                options = {
+                    separator_style = 'slant',
+                    indicator = {
+                        style = 'underline',
+                    },
+                    offsets = {
+                        {
+                            filetype = "neo-tree",
+                            text = "File Explorer",
+                            separator = true -- use a "true" to enable the default, or set your own character
+                        }
+                    },
+                }
+            }
+        end
+    },
+    {
+        "tmsvg/pear-tree", -- add functionality to automatically place closing symbol
+        config = function()
+            -- disable automatic mapping
+            vim.g.pear_tree_map_special_keys = 0
+
+            --mappings
+            keyset("i", "<BS>", "<Plug>(PearTreeBackspace)")
+            keyset("i", "<Esc>", "<Plug>(PearTreeFinishExpansion)")
+
+            -- Smart pairs are disabled by default:
+            vim.g.pear_tree_smart_openers = 1
+            vim.g.pear_tree_smart_closers = 1
+            vim.g.pear_tree_smart_backspace = 1
+        end
+    },
+    {
+        "folke/which-key.nvim", -- shows possible keybinds when a key is pressed
+        config = function()
+            require("which-key").setup({})
+        end,
+    },
+    {
+        "nvim-neo-tree/neo-tree.nvim", -- add a vim file explorer
+        event = "VeryLazy",
+        branch = "v2.x",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons",
+            "MunifTanjim/nui.nvim",
         },
-        source_selector = {
-          winbar = true, -- toggle to show selector on winbar
-          content_layout = "center",
-          tabs_layout = "equal",
-          show_separator_on_edge = true,
-          sources = {
-            { source = "filesystem", display_name = "󰉓 Files" },
-            { source = "buffers", display_name = "󰈙 Buffers" },
-            { source = "git_status", display_name = " Git" },
-            -- { source = "document_symbols", display_name = " Symbols" },
-          },
-        }
-      })
-    end,
-  },
-  {
-    "mbbill/undotree", -- add an undotree
-    config = function()
-      vim.g.undotree_WindowLayout = 3
-    end,
-  },
-  {
-    "gelguy/wilder.nvim", -- add better commandline/searchline completion
-    config = function()
-      local wilder = require("wilder")
-      wilder.setup({
-        modes = {":", "/", "?"}
-      })
-      wilder.set_option("renderer", wilder.popupmenu_renderer({
-        highlighter = wilder.basic_highlighter(),
-        left = {" ", wilder.popupmenu_devicons()},
-        right = {" ", wilder.popupmenu_scrollbar()},
-      }))
-    end,
-  },
+        config = function ()
+            vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+
+            -- disable netrw for neotree
+            vim.g.loaded_netrw = 1
+            vim.g.loaded_netrwPlugin = 1
+            require("neo-tree").setup({
+                open_files_do_not_replace_types = { "terminal" },
+                close_if_last_window = true,
+                sources = {
+                    "filesystem",
+                    "buffers",
+                    "git_status",
+                    -- "document_symbols", -- I would love to use this but it doesn't work with Coc https://github.com/nvim-neo-tree/neo-tree.nvim/issues/879
+                },
+                source_selector = {
+                    winbar = true, -- toggle to show selector on winbar
+                    content_layout = "center",
+                    tabs_layout = "equal",
+                    show_separator_on_edge = true,
+                    sources = {
+                        { source = "filesystem", display_name = "󰉓 Files" },
+                        { source = "buffers", display_name = "󰈙 Buffers" },
+                        { source = "git_status", display_name = " Git" },
+                        -- { source = "document_symbols", display_name = " Symbols" },
+                    },
+                }
+            })
+        end,
+    },
+    {
+        "mbbill/undotree", -- add an undotree
+        config = function()
+            vim.g.undotree_WindowLayout = 3
+        end,
+    },
+    {
+        "gelguy/wilder.nvim", -- add better commandline/searchline completion
+        config = function()
+            local wilder = require("wilder")
+            wilder.setup({
+                modes = {":", "/", "?"}
+            })
+            wilder.set_option("renderer", wilder.popupmenu_renderer({
+                highlighter = wilder.basic_highlighter(),
+                left = {" ", wilder.popupmenu_devicons()},
+                right = {" ", wilder.popupmenu_scrollbar()},
+            }))
+        end,
+    },
 })
 
 
