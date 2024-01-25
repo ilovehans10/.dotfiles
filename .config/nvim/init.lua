@@ -7,7 +7,7 @@ local option = vim.opt
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 -- set variable for vimrc location
-vim.g.vimrc = vim.fn.expand('<sfile>:p')
+vim.g.vimrc = vim.fn.resolve(vim.fn.expand('<sfile>:p'))
 
 
 -- many of my options (TODO sort)
@@ -167,7 +167,7 @@ require("lazy").setup({
             -- function that shows documentation based on file type
             function _G.show_docs()
                 local cw = vim.fn.expand("<cword>")
-                local fname = vim.fn.expand("%:p")
+                local fname = vim.fn.resolve(vim.fn.expand("%:p"))
                 if (vim.fn.index({"vim", "help"}, vim.bo.filetype) >= 0) or (vim.g.vimrc == fname) then
                     vim.api.nvim_command("h " .. cw)
                 elseif vim.api.nvim_eval("coc#rpc#ready()") then
