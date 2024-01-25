@@ -88,13 +88,14 @@ keyset("n", "<leader>h", ":let @/=\"\"<CR>")
 keyset("n", "<leader>H", ":set hlsearch!<CR>")
 keyset("n", "<leader>t", ":vsplit term://zsh<CR>")
 keyset("n", "<leader>T", ":vert resize 75<CR>")
+keyset("ca", "help", "vert help") -- opens help in vertical windows
 keyset("c", "w!!", "w !sudo tee > /dev/null %") -- allow saving of files with sudo when needed
 
 keyset("t", "<ESC><ESC>", "<C-\\><C-n>")
 
 
 vim.api.nvim_create_augroup("helpbuffer", {})
-vim.api.nvim_create_autocmd( "BufEnter", { pattern = "*.txt", group = "helpbuffer", command = "if &buftype == 'help' | vert resize 78 | setlocal nonumber norelativenumber signcolumn=no | wincmd L | endif" })
+vim.api.nvim_create_autocmd( "BufEnter", { pattern = "*.txt", group = "helpbuffer", command = "if &buftype == 'help' | vert resize 78 | setlocal nonumber norelativenumber signcolumn=no | endif" })
 
 vim.api.nvim_create_augroup("myterm", {})
 vim.api.nvim_create_autocmd("TermOpen", { group = "myterm", command = "if &buftype ==# 'terminal' | vert resize 100 | endif" })
@@ -135,6 +136,16 @@ require("lazy").setup({
         end
     },
     {
+        "wfxr/minimap.vim",
+        build = "cargo install --locked code-minimap",
+        config = function()
+            vim.g.minimap_width = 10
+            vim.g.minimap_auto_start = 1
+            vim.g.minimap_auto_start_win_enter = 1
+        end,
+
+    },
+    {
         "airblade/vim-gitgutter", -- show git information in the left gutter
     },
     {
@@ -169,7 +180,7 @@ require("lazy").setup({
                 local cw = vim.fn.expand("<cword>")
                 local fname = vim.fn.resolve(vim.fn.expand("%:p"))
                 if (vim.fn.index({"vim", "help"}, vim.bo.filetype) >= 0) or (vim.g.vimrc == fname) then
-                    vim.api.nvim_command("h " .. cw)
+                    vim.api.nvim_command("vert h " .. cw)
                 elseif vim.api.nvim_eval("coc#rpc#ready()") then
                     vim.fn.CocActionAsync("doHover")
                 else
