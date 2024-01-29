@@ -23,6 +23,7 @@ local OS=$(uname -s)
 case $OS in
   Darwin)
     export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:/usr/local/Cellar/ruby/2.7.0/bin:/usr/local/lib/ruby/gems/2.7.0/gems:$HOME/Documents/RubyMine/bin:$HOME/go/bin:$HOME/.local/bin:/usr/local/sbin:/usr/local/opt/ruby/bin:~/Library/Python/3.9/bin:$PATH"
+    export FPATH="/Users/larssonh/.local/share/rustup/toolchains/stable-aarch64-apple-darwin/share/zsh/site-functions:$FPATH"
     export ZSH="${HOME}/.config/zsh/oh-my-zsh"
     export ZPLUG_HOME="/opt/homebrew/opt/zplug"
     source "${HOME}/.config/.iterm2_shell_integration.zsh";;
