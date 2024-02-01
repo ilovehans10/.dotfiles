@@ -162,7 +162,7 @@ require("lazy").setup({
         branch = "release",
         config = function()
             -- set extensions for coc
-            vim.g.coc_global_extensions = {"coc-sh", "coc-rust-analyzer", "coc-lua", "coc-pyright", "coc-json"}
+            vim.g.coc_global_extensions = {"coc-sh", "coc-rust-analyzer", "coc-lua", "coc-pyright", "coc-json", "coc-snippets"}
 
             -- coc setup
             function _G.check_back_space()
@@ -385,7 +385,7 @@ keyset("n", "|", ":UndotreeToggle<cr>")
 
 local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
 
-keyset("i", "<TAB>", "coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? '<TAB>' : coc#refresh()", opts)
+keyset("i", "<TAB>", [[coc#pum#visible() ? coc#pum#next(1) : coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" : v:lua.check_back_space() ? '<TAB>' : coc#refresh()]], opts)
 keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
 keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<Plug>(PearTreeExpand)"]], opts)
 

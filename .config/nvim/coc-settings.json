@@ -35,5 +35,6 @@
   "rust-analyzer.checkOnSave": true,
   "rust-analyzer.check.command": "clippy",
   "suggest.noselect": true,
-  "coc.preferences.jumpCommand": "tab drop"
+  "coc.preferences.jumpCommand": "tab drop",
+  "snippets.ultisnips.pythonPrompt": false
 }
