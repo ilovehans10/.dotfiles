@@ -21,7 +21,7 @@ export READER="zathura"
 
 # Program configuration
 export MANWIDTH=${MANWIDTH:-80}
-export LESS='-Pslines %lt-%lb (%Pt-%Pb \%) file %f'
+export LESS='-RPslines %lt-%lb (%Pt-%Pb \%) file %f'
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'
 export LESS_TERMCAP_me=$'\e[0m'
