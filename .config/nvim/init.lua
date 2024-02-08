@@ -198,6 +198,8 @@ require("lazy").setup({
                 command = "silent call CocActionAsync('highlight')",
                 desc = "Highlight symbol under cursor on CursorHold"
             })
+            keyset("n", "]d", ":call CocAction('diagnosticNext')<CR>", {silent = true, noremap = true})
+            keyset("n", "[d", ":call CocAction('diagnosticPrevious')<CR>", {silent = true, noremap = true})
         end,
     },
     {
