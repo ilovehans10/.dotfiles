@@ -90,7 +90,7 @@ keyset("n", "<leader>H", ":set hlsearch!<CR>")
 keyset("n", "<leader>t", ":vsplit term://zsh<CR>")
 keyset("n", "<leader>T", ":vert resize 75<CR>")
 keyset("ca", "help", "vert help") -- opens help in vertical windows
-keyset("c", "w!!", "w !sudo tee > /dev/null %") -- allow saving of files with sudo when needed
+keyset("ca", "w!!", "w !sudo tee > /dev/null %") -- allow saving of files with sudo when needed
 
 keyset("t", "<ESC><ESC>", "<C-\\><C-n>")
 
