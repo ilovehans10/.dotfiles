@@ -99,8 +99,8 @@ vim.api.nvim_create_augroup("helpbuffer", {})
 vim.api.nvim_create_autocmd( "BufEnter", { pattern = "*.txt", group = "helpbuffer", command = "if &buftype == 'help' | vert resize 78 | setlocal nonumber norelativenumber signcolumn=no | endif" })
 
 vim.api.nvim_create_augroup("myterm", {})
-vim.api.nvim_create_autocmd("TermOpen", { group = "myterm", command = "if &buftype ==# 'terminal' | vert resize 100 | endif" })
-vim.api.nvim_create_autocmd("BufEnter", { group = "myterm", command = "if &buftype ==# 'terminal' | setlocal nonumber norelativenumber nospell signcolumn=no | startinsert | endif" })
+vim.api.nvim_create_autocmd("TermOpen", { group = "myterm", command = "vert resize 100 | setlocal nonumber norelativenumber nospell signcolumn=no" })
+vim.api.nvim_create_autocmd("BufEnter", { group = "myterm", command = "if getwininfo()[winnr()-1]['terminal'] | startinsert | else | stopinsert | endif" })
 
 vim.api.nvim_create_augroup("trailingwhitespace", {})
 vim.api.nvim_create_autocmd("BufWritePre", { group = "trailingwhitespace", command = [[ let save_view = winsaveview() | %s/\s\+$//e | call winrestview(save_view) ]] })
