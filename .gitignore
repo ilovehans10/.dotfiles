@@ -1,2 +1,5 @@
 .config/ranger/plugins/__pycache__
 .config/ranger/plugins/__init__.py
+.config/nvim/lazy-lock.json
+.config/ranger/__pycache__
+.zcompdump-*
