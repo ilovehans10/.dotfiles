@@ -46,6 +46,7 @@ alias yt="yt-dlp"
 alias vi="nvim"
 alias vim="nvim"
 alias vimdiff="nvim -d"
+alias tmux='TERM=xterm-256color tmux -f "$XDG_CONFIG_HOME"/tmux/tmux.conf'
 alias lg="lazygit"
 alias lsd="du -hd1"
 case $OS in
