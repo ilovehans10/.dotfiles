@@ -235,6 +235,9 @@ require("lazy").setup({
         end
     },
     {
+        "nvim-treesitter/nvim-treesitter-context"
+    },
+    {
         'nvim-lualine/lualine.nvim', -- lua based statusline
         dependencies = { 'nvim-tree/nvim-web-devicons' },
         config = function()
