@@ -103,8 +103,8 @@ vim.api.nvim_create_augroup("helpbuffer", {})
 vim.api.nvim_create_autocmd( "BufEnter", { pattern = "*.txt", group = "helpbuffer", command = "if &buftype == 'help' | vert resize 78 | setlocal nonumber norelativenumber signcolumn=no | endif" })
 
 vim.api.nvim_create_augroup("myterm", {})
-vim.api.nvim_create_autocmd("TermOpen", { group = "myterm", command = "if &buftype ==# 'terminal' | vert resize 100 | endif" })
-vim.api.nvim_create_autocmd("BufEnter", { group = "myterm", command = "if &buftype ==# 'terminal' | setlocal nonumber norelativenumber nospell signcolumn=no | startinsert | endif" })
+vim.api.nvim_create_autocmd("TermOpen", { group = "myterm", command = "vert resize 100 | setlocal nonumber norelativenumber nospell signcolumn=no" })
+vim.api.nvim_create_autocmd("BufEnter", { group = "myterm", command = "if getwininfo()[winnr()-1]['terminal'] | startinsert | else | stopinsert | endif" })
 
 vim.api.nvim_create_augroup("trailingwhitespace", {})
 vim.api.nvim_create_autocmd("BufWritePre", { group = "trailingwhitespace", command = [[ let save_view = winsaveview() | %s/\s\+$//e | call winrestview(save_view) ]] })
@@ -160,7 +160,27 @@ require("lazy").setup({
         end
     },
     {
+        "christoomey/vim-tmux-navigator",
+        cmd = {
+            "TmuxNavigateLeft",
+            "TmuxNavigateDown",
+            "TmuxNavigateUp",
+            "TmuxNavigateRight",
+            "TmuxNavigatePrevious",
+        },
+        keys = {
+            { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
+            { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
+            { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
+            { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
+            { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+        },
+    },
+    {
         "easymotion/vim-easymotion", -- easymotion allows for smarter movement
+    },
+    {
+        "tpope/vim-surround",
     },
     {
         "neoclide/coc.nvim", -- coc does completion and snippets
@@ -202,6 +222,8 @@ require("lazy").setup({
                 command = "silent call CocActionAsync('highlight')",
                 desc = "Highlight symbol under cursor on CursorHold"
             })
+            keyset("n", "]d", ":call CocAction('diagnosticNext')<CR>", {silent = true, noremap = true})
+            keyset("n", "[d", ":call CocAction('diagnosticPrevious')<CR>", {silent = true, noremap = true})
         end,
     },
     {
@@ -217,6 +239,14 @@ require("lazy").setup({
                     enable = true,
                 }
             }
+        end
+    },
+    {
+        "nvim-treesitter/nvim-treesitter-context",
+        config = function()
+            keyset("n", "[c", function()
+                require("treesitter-context").go_to_context(vim.v.count1)
+            end, { silent = true })
         end
     },
     {

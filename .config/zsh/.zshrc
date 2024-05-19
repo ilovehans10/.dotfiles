@@ -61,7 +61,7 @@ alias vimrc="nvim ~/.config/nvim/init.lua"
 alias zshrc="nvim ~/.config/zsh/.zshrc"
 alias zprofile="nvim ~/.config/zsh/.zprofile"
 alias vimtip="nvim ~/.config/zsh/tips"
-alias zsource="source ~/.zshrc"
+alias zsource="source $ZDOTDIR/.zshrc"
 alias polybarconfig="nvim ~/.config/polybar/config"
 alias i3config="nvim ~/.config/i3/config"
 alias sss="sudo systemctl suspend"
@@ -96,6 +96,14 @@ ses(){
 }
 sds(){
   sudo systemctl disable "$@" ; sudo systemctl stop "$@"
+}
+yy() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
 }
 ra(){
   ranger "$1" --choosedir=/tmp/.rangerdir; LASTDIR=`cat /tmp/.rangerdir`; cd "$LASTDIR"
