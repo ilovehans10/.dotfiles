@@ -176,6 +176,9 @@ require("lazy").setup({
         "easymotion/vim-easymotion", -- easymotion allows for smarter movement
     },
     {
+        "tpope/vim-surround",
+    },
+    {
         "neoclide/coc.nvim", -- coc does completion and snippets
         branch = "release",
         config = function()
