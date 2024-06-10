@@ -425,4 +425,8 @@ keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
 keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<Plug>(PearTreeExpand)"]], opts)
 
 keyset("n", "gd", "<Plug>(coc-definition)", {silent = true})
+keyset("n", "<leader>qf", "<Plug>(coc-fix-current)", {silent = true})
+keyset("n", "<leader>cc", "<Plug>(coc-codeaction-cursor)", {silent = true})
+keyset("n", "<leader>cl", "<Plug>(coc-codeaction-line)", {silent = true})
+keyset("n", "<leader>cf", "<Plug>(coc-codeaction-line)", {silent = true})
 keyset("n", "<leader>rn", "<Plug>(coc-rename)", {silent = true})
