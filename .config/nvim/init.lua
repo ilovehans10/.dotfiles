@@ -13,7 +13,7 @@ vim.g.vimrc = vim.fn.resolve(vim.fn.expand('<sfile>:p'))
 -- many of my options (TODO sort)
 option.foldmethod = "expr"
 option.foldexpr = "nvim_treesitter#foldexpr()"
-option.foldminlines = 10
+option.foldminlines = 5
 option.foldnestmax = 3
 option.cursorline = true -- highlight the cursorline based on cursorlineopt
 option.cursorlineopt = "number" -- highlight the linenumber of the cursorline
