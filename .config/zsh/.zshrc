@@ -47,7 +47,7 @@ alias vi="nvim"
 alias vim="nvim"
 alias vimdiff="nvim -d"
 alias lg="lazygit"
-alias lsd="du -hd1"
+alias duls="du -hd1"
 case $OS in
   Darwin)
     alias ls="ls -G";;
