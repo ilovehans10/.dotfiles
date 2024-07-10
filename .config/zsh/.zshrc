@@ -153,7 +153,6 @@ source $ZSH/oh-my-zsh.sh
 # this has to be loaded after oh-my-zsh
 unalias run-help 2> /dev/null
 autoload run-help
-alias man="run-help"
 
 case $OS in
   Darwin)
