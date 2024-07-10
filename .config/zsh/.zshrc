@@ -151,7 +151,7 @@ source $ZSH/oh-my-zsh.sh
 
 # use run-help so builtins can be searched
 # this has to be loaded after oh-my-zsh
-unalias run-help
+unalias run-help 2> /dev/null
 autoload run-help
 alias man="run-help"
 
