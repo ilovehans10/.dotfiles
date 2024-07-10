@@ -155,6 +155,12 @@ zplug romkatv/powerlevel10k, as:theme, depth:1
 # source oh-my-zsh/zplug/bindings
 source $ZSH/oh-my-zsh.sh
 
+# use run-help so builtins can be searched
+# this has to be loaded after oh-my-zsh
+unalias run-help
+autoload run-help
+alias man="run-help"
+
 if [ ! -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]; then
   git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 fi
