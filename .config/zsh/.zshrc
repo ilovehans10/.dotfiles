@@ -48,12 +48,6 @@ alias vim="nvim"
 alias vimdiff="nvim -d"
 alias lg="lazygit"
 alias duls="du -hd1"
-case $OS in
-  Darwin)
-    alias ls="ls -G";;
-  Linux)
-    alias ls="ls --color=always -h --group-directories-first";;
-esac
 alias df="df -h"
 alias lsds="du -hd1 | sort -h"
 alias mkdir="mkdir -pv"
@@ -160,6 +154,13 @@ source $ZSH/oh-my-zsh.sh
 unalias run-help
 autoload run-help
 alias man="run-help"
+
+case $OS in
+  Darwin)
+    alias ls="lsd";;
+  Linux)
+    alias ls="ls --color=always -h --group-directories-first";;
+esac
 
 if [ ! -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]; then
   git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
