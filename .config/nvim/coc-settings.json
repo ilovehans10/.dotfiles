@@ -3,7 +3,7 @@
     "efm": {
       "command": "efm-langserver",
       "args": [],
-      "filetypes": ["vim", "markdown", "Ruby"]
+      "filetypes": ["vim", "markdown", "Ruby", "sh"]
     },
     "ccls": {
       "command": "ccls",
