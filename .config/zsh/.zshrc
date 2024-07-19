@@ -7,8 +7,8 @@ fi
 
 #This is only run when the shell originally starts zsh and doesn't run on source ~/.zshrc
 #https://superuser.com/questions/1153153/zsh-differentiate-between-source-zshrc-and-shell-initially-reading-zshrc
-[ $ZSH_EVAL_CONTEXT = file ] && FRESHSHELL=true
-[ "$FRESHSHELL" = true ] && sed -e 's/^#.*$//' -e '/^$/d' ${HOME}/.config/zsh/tips | shuf -n1
+[ "$ZSH_EVAL_CONTEXT" = file ] && FRESHSHELL=true
+[ "$FRESHSHELL" = true ] && sed -e 's/^#.*$//' -e '/^$/d' "${HOME}"/.config/zsh/tips | shuf -n1
 
 # setup vi keybindings
 set -o vi
@@ -18,7 +18,7 @@ zstyle ':omz:update' mode auto
 zstyle ':omz:update' frequency 10
 
 # set OS variable for different configurations on different computers
-local OS=$(uname -s)
+OS=$(uname -s)
 
 case $OS in
   Darwin)
@@ -33,7 +33,7 @@ case $OS in
     export ZSH="${HOME}/.config/oh-my-zsh";;
 esac
 
-source $ZPLUG_HOME/init.zsh
+source "$ZPLUG_HOME"/init.zsh
 
 # oh-my-zsh configuration
 HYPHEN_INSENSITIVE="true"
@@ -100,13 +100,13 @@ yy() {
 	rm -f -- "$tmp"
 }
 ra(){
-  ranger "$1" --choosedir=/tmp/.rangerdir; LASTDIR=`cat /tmp/.rangerdir`; cd "$LASTDIR"
+  ranger "$1" --choosedir=/tmp/.rangerdir; LASTDIR=$(cat /tmp/.rangerdir); cd "$LASTDIR"
 }
 addtip(){
-  echo "$@" >> ${HOME}/.config/zsh/tips
+  echo "$@" >> "${HOME}"/.config/zsh/tips
 }
 tip(){
-  sed -e 's/#.*$//' -e '/^$/d' ${HOME}/.config/zsh/tips | shuf -n${1:-1}
+  sed -e 's/#.*$//' -e '/^$/d' "${HOME}"/.config/zsh/tips | shuf -n"${1:-1}"
 }
 getline(){
   head -n "$1" "$2" | tail -n 1
@@ -125,7 +125,7 @@ mpvbedtime(){
 }
 timezsh() {
   shell=${1-$SHELL}
-  for i in $(seq 1 10); do /usr/bin/time -p $shell -i -c exit; done
+  for _ in $(seq 1 10); do /usr/bin/time -p "$shell" -i -c exit; done
 }
 
 # plugins
@@ -147,7 +147,7 @@ plugins=(
 zplug romkatv/powerlevel10k, as:theme, depth:1
 
 # source oh-my-zsh/zplug/bindings
-source $ZSH/oh-my-zsh.sh
+source "$ZSH"/oh-my-zsh.sh
 
 # use run-help so builtins can be searched
 # this has to be loaded after oh-my-zsh
@@ -162,7 +162,7 @@ case $OS in
 esac
 
 if [ ! -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]; then
-  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+  git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
 fi
 
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
@@ -176,3 +176,5 @@ unset FRESHSHELL
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+
+unset OS
