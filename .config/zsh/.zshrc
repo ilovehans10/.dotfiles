@@ -136,6 +136,7 @@ plugins=(
   git
   history-substring-search
   hitchhiker
+  meaningful-error-codes
   rsync
   sudo
   taskwarrior
@@ -163,6 +164,9 @@ esac
 
 if [ ! -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]; then
   git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
+fi
+if [ ! -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/meaningful-error-codes" ]; then
+  git clone https://github.com/cedi/meaningful-error-codes "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/meaningful-error-codes
 fi
 
 zplug "zsh-users/zsh-syntax-highlighting", defer:2

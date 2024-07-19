@@ -46,6 +46,7 @@
   # last prompt line gets hidden if it would overlap with left prompt.
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
+    custom_exit_status      # meaningful error code
     status                  # exit code of the last command
     command_execution_time  # duration of the last command
     background_jobs         # presence of background jobs
@@ -114,6 +115,10 @@
     # wifi                  # wifi speed
     # example               # example user-defined segment (see prompt_example function below)
   )
+
+  # Define custom section for exit status of last command to be explained by meaningful_error_codes
+  typeset -g POWERLEVEL9K_CUSTOM_EXIT_STATUS='echo ${exit_status}'
+  typeset -g POWERLEVEL9K_CUSTOM_EXIT_STATUS_FOREGROUND=160
 
   # Defines character set used by powerlevel10k. It's best to let `p10k configure` set it for you.
   typeset -g POWERLEVEL9K_MODE=nerdfont-complete
