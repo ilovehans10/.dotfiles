@@ -348,7 +348,10 @@ require("lazy").setup({
     {
         "folke/which-key.nvim", -- shows possible keybinds when a key is pressed
         config = function()
-            require("which-key").setup({})
+            require("which-key").setup({
+                triggers = { { "<auto>", mode = "nixsoc" }
+                }
+            })
         end,
     },
     {
