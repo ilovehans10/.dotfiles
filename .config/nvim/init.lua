@@ -104,7 +104,7 @@ vim.api.nvim_create_autocmd( "BufEnter", { pattern = "*.txt", group = "helpbuffe
 
 vim.api.nvim_create_augroup("myterm", {})
 vim.api.nvim_create_autocmd("TermOpen", { group = "myterm", command = "vert resize 100 | setlocal nonumber norelativenumber nospell signcolumn=no" })
-vim.api.nvim_create_autocmd("BufEnter", { group = "myterm", command = "if getwininfo()[winnr()-1]['terminal'] | startinsert | else | stopinsert | endif" })
+vim.api.nvim_create_autocmd("BufEnter", { group = "myterm", command = "if getwininfo(gettabinfo()[tabpagenr()-1]['windows'][(winnr()-1)])[0]['terminal'] | startinsert | else | stopinsert | endif" })
 
 vim.api.nvim_create_augroup("trailingwhitespace", {})
 vim.api.nvim_create_autocmd("BufWritePre", { group = "trailingwhitespace", command = [[ let save_view = winsaveview() | %s/\s\+$//e | call winrestview(save_view) ]] })
