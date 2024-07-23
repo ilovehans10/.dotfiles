@@ -427,6 +427,7 @@ keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<Plug>(PearTreeE
 keyset("n", "gd", "<Plug>(coc-definition)", {silent = true})
 keyset("n", "<leader>qf", "<Plug>(coc-fix-current)", {silent = true})
 keyset("n", "<leader>cc", "<Plug>(coc-codeaction-cursor)", {silent = true})
+keyset("v", "<leader>c", "<Plug>(coc-codeaction-selected)", {silent = true})
 keyset("n", "<leader>cl", "<Plug>(coc-codeaction-line)", {silent = true})
 keyset("n", "<leader>cf", "<Plug>(coc-codeaction-line)", {silent = true})
 keyset("n", "<leader>rn", "<Plug>(coc-rename)", {silent = true})
