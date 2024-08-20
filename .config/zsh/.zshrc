@@ -107,7 +107,7 @@ addtip(){
   echo "$@" >> "${HOME}"/.config/zsh/tips
 }
 tip(){
-  sed -e 's/#.*$//' -e '/^$/d' "${HOME}"/.config/zsh/tips | shuf -n"${1:-1}"
+  sed -e 's/^#.*$//' -e '/^$/d' "${HOME}"/.config/zsh/tips | shuf -n"${1:-1}"
 }
 getline(){
   head -n "$1" "$2" | tail -n 1
