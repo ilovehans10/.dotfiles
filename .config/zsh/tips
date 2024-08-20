@@ -11,18 +11,18 @@ make grep show only matches: grep -o
 
 # shell specific
 redirect to multiple commands: seq 3 | tee >(xargs echo) | cat -n
-the proper way to do shell variables: varname=true; [ "$varname" = true ]
+the proper way to set and check shell variable named FOO: FOO=true; [ "$FOO" = true ]
 # https://unix.stackexchange.com/questions/176001/how-can-i-list-all-shell-variables
 list all shell variables: typeset
 # https://superuser.com/questions/563939/save-command-to-history-without-executing-in-bash
 keep a command from running, but still have it added to the history by appending: !#%:p
-to comment out a line esc - # will comment, add to history, then give you a new prompt
-to echo variable value or nope if variable is not set: echo ${FOO-nope}
-to reload zsh configuration use "exec zsh"
+to comment out a line and add it to zsh history: <ESC-#>
+to echo value of variable FOO or nope if variable is not set: echo ${FOO-nope}
+to reload zsh configuration without mangling variables: exec zsh
 
 # vim specific
-the tabs of a file can be converted to tabstop with the :retab command
-to put all yanked text into the clipboard use :set clipboard=unnamed
+the tabs of a file can be converted to tabstop with: :retab
+to put all yanked text into the clipboard: :set clipboard=unnamed
 
 # relating to tips
 add tip: addtip TIP
