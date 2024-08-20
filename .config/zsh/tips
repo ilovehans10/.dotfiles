@@ -24,6 +24,7 @@ look at help for shell builtins: run-help
 # vim specific
 the tabs of a file can be converted to tabstop with: :retab
 to put all yanked text into the clipboard: :set clipboard=unnamed
+open buffer in new tab: :tab sb FILENAME
 
 # relating to tips
 add tip: addtip TIP
