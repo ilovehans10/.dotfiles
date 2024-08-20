@@ -81,6 +81,7 @@ keyset("v", "<leader>w", "g<C-g>") -- show word count for visual selection
 keyset("n", "<leader>ev", (":tab drop " .. vim.fn.expand('<sfile>:p') .. "<CR>"))
 keyset("n", "<leader>ez", "<CMD>tab drop ~/.config/zsh/.zshrc<CR>")
 keyset("n", "<leader>ep", "<CMD>tab drop ~/.config/zsh/.zprofile<CR>")
+keyset("n", "<leader>et", "<CMD>tab drop ~/.config/zsh/tips<CR>")
 keyset("n", "<leader>s", ":s///g<Left><Left>")
 keyset("n", "<leader>S", ":%s///g<Left><Left>")
 keyset("n", "<leader>f", ":%! rustfmt<CR>")
