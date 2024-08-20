@@ -180,9 +180,11 @@ require("lazy").setup({
     },
     {
         "easymotion/vim-easymotion", -- easymotion allows for smarter movement
+        event = "VeryLazy",
     },
     {
         "tpope/vim-surround",
+        event = "VeryLazy",
     },
     {
         "neoclide/coc.nvim", -- coc does completion and snippets
@@ -333,6 +335,7 @@ require("lazy").setup({
     },
     {
         "tmsvg/pear-tree", -- add functionality to automatically place closing symbol
+        event = "VeryLazy",
         config = function()
             -- disable automatic mapping
             vim.g.pear_tree_map_special_keys = 0
@@ -397,12 +400,14 @@ require("lazy").setup({
     },
     {
         "mbbill/undotree", -- add an undotree
+        event = "VeryLazy",
         config = function()
             vim.g.undotree_WindowLayout = 3
         end,
     },
     {
         "gelguy/wilder.nvim", -- add better commandline/searchline completion
+        event = "VeryLazy",
         config = function()
             local wilder = require("wilder")
             wilder.setup({
