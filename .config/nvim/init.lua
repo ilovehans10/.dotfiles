@@ -257,10 +257,9 @@ require("lazy").setup({
     },
     {
         "nvim-treesitter/nvim-treesitter-context",
+        event = "VeryLazy",
         config = function()
-            keyset("n", "[c", function()
-                require("treesitter-context").go_to_context(vim.v.count1)
-            end, { silent = true })
+            keyset("n", "[c", function() require("treesitter-context").go_to_context(vim.v.count1) end, { silent = true })
         end
     },
     {
