@@ -62,6 +62,7 @@ alias i3config="nvim ~/.config/i3/config"
 alias sss="sudo systemctl suspend"
 alias rsync="noglob rsync --exclude-from=$HOME/.config/git/gitignore"
 alias mvr="rsync -Ph"
+# source https://askubuntu.com/questions/22037/aliases-not-available-when-using-sudo
 alias sudo="sudo "
 
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
