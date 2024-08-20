@@ -16,9 +16,11 @@ list all shell variables: typeset
 keep a command from running, but still have it added to the history by appending: !#%:p
 to comment out a line esc - # will comment, add to history, then give you a new prompt
 to echo variable value or nope if variable is not set: echo ${FOO-nope}
+to reload zsh configuration use "exec zsh"
 
 # vim specific
 the tabs of a file can be converted to tabstop with the :retab command
+to put all yanked text into the clipboard use :set clipboard=unnamed
 
 # relating to tips
 add tip: addtip TIP
