@@ -109,6 +109,9 @@ addtip(){
 tip(){
   sed -e 's/^#.*$//' -e '/^$/d' "${HOME}"/.config/zsh/tips | shuf -n"${1:-1}"
 }
+tipgrep(){
+    grep -i $1 <(sed -e 's/^#.*$//' -e '/^$/d' "${HOME}"/.config/zsh/tips)
+}
 getline(){
   head -n "$1" "$2" | tail -n 1
 }
