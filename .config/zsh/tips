@@ -21,6 +21,7 @@ to comment out a line and add it to zsh history: <ESC-#>
 to echo value of variable FOO or nope if variable is not set: echo ${FOO-nope}
 to reload zsh configuration without mangling variables: exec zsh
 look at help for shell builtins: run-help
+the PARAMETER EXPANSION section of the zshexpn man page has substitutions that make checking variables easy
 
 # vim specific
 the tabs of a file can be converted to tabstop with: :retab
