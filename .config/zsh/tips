@@ -28,3 +28,5 @@ to put all yanked text into the clipboard: :set clipboard=unnamed
 add tip: addtip TIP
 edit tip file: vimtip
 print [N] tip(s): tip [N]
+
+# added with addtip (needs sorted and possibly formatted)
