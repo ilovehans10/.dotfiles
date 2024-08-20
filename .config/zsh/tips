@@ -1,3 +1,5 @@
+# all tips are described at the beginning of the line followed by a colon which is followed by a space and then any related command
+# command options follow standard convention of documentation for arguments so they are screaming case
 # mac specific
 mac list DNS servers: scutil --dns
 
