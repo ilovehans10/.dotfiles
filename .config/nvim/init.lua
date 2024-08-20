@@ -399,6 +399,10 @@ require("lazy").setup({
         end,
     },
     {
+        "tpope/vim-fugitive",
+        cmd = "Git"
+    },
+    {
         "mbbill/undotree", -- add an undotree
         event = "VeryLazy",
         config = function()
