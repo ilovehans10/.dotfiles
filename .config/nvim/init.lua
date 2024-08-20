@@ -150,7 +150,6 @@ require("lazy").setup({
             vim.g.minimap_auto_start = 1
             vim.g.minimap_auto_start_win_enter = 1
         end,
-
     },
     {
         "airblade/vim-gitgutter", -- show git information in the left gutter
@@ -226,8 +225,19 @@ require("lazy").setup({
                 command = "silent call CocActionAsync('highlight')",
                 desc = "Highlight symbol under cursor on CursorHold"
             })
+            local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
             keyset("n", "]d", ":call CocAction('diagnosticNext')<CR>", {silent = true, noremap = true})
             keyset("n", "[d", ":call CocAction('diagnosticPrevious')<CR>", {silent = true, noremap = true})
+            keyset("i", "<TAB>", [[coc#pum#visible() ? coc#pum#next(1) : coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" : v:lua.check_back_space() ? '<TAB>' : coc#refresh()]], opts)
+            keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
+            keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<Plug>(PearTreeExpand)"]], opts)
+            keyset("n", "gd", "<Plug>(coc-definition)", {silent = true})
+            keyset("n", "<leader>qf", "<Plug>(coc-fix-current)", {silent = true})
+            keyset("n", "<leader>cc", "<Plug>(coc-codeaction-cursor)", {silent = true})
+            keyset("v", "<leader>c", "<Plug>(coc-codeaction-selected)", {silent = true})
+            keyset("n", "<leader>cl", "<Plug>(coc-codeaction-line)", {silent = true})
+            keyset("n", "<leader>cf", "<Plug>(coc-codeaction-line)", {silent = true})
+            keyset("n", "<leader>rn", "<Plug>(coc-rename)", {silent = true})
         end,
     },
     {
@@ -361,12 +371,14 @@ require("lazy").setup({
     },
     {
         "nvim-neo-tree/neo-tree.nvim", -- add a vim file explorer
-        event = "VeryLazy",
         branch = "v2.x",
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-tree/nvim-web-devicons",
             "MunifTanjim/nui.nvim",
+        },
+        keys = {
+            { "\\", "<cmd>Neotree toggle<cr>" }
         },
         config = function ()
             vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
@@ -404,7 +416,9 @@ require("lazy").setup({
     },
     {
         "mbbill/undotree", -- add an undotree
-        event = "VeryLazy",
+        keys = {
+            { "|", "<cmd>UndotreeToggle<cr>"}
+        },
         config = function()
             vim.g.undotree_WindowLayout = 3
         end,
@@ -425,23 +439,3 @@ require("lazy").setup({
         end,
     },
 })
-
-
--- Plugin Keybindings
-keyset("n", "\\", ":Neotree toggle<cr>")
-keyset("n", "|", ":UndotreeToggle<cr>")
-
-
-local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
-
-keyset("i", "<TAB>", [[coc#pum#visible() ? coc#pum#next(1) : coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" : v:lua.check_back_space() ? '<TAB>' : coc#refresh()]], opts)
-keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
-keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<Plug>(PearTreeExpand)"]], opts)
-
-keyset("n", "gd", "<Plug>(coc-definition)", {silent = true})
-keyset("n", "<leader>qf", "<Plug>(coc-fix-current)", {silent = true})
-keyset("n", "<leader>cc", "<Plug>(coc-codeaction-cursor)", {silent = true})
-keyset("v", "<leader>c", "<Plug>(coc-codeaction-selected)", {silent = true})
-keyset("n", "<leader>cl", "<Plug>(coc-codeaction-line)", {silent = true})
-keyset("n", "<leader>cf", "<Plug>(coc-codeaction-line)", {silent = true})
-keyset("n", "<leader>rn", "<Plug>(coc-rename)", {silent = true})
