@@ -8,7 +8,8 @@ fi
 #This is only run when the shell originally starts zsh and doesn't run on source ~/.zshrc
 #https://superuser.com/questions/1153153/zsh-differentiate-between-source-zshrc-and-shell-initially-reading-zshrc
 [ "$ZSH_EVAL_CONTEXT" = file ] && FRESHSHELL=true
-[ "$FRESHSHELL" = true ] && sed -e 's/^#.*$//' -e '/^$/d' "${HOME}"/.config/zsh/tips | shuf -n1
+#This displays a tips whenever a new shell is created. The sed strings do the following: remove commments, remove blank lines, apply escape codes to the output for pretty colors
+[ "$FRESHSHELL" = true ] && sed -e 's/^#.*$//' -e '/^$/d' -e 's/^\(.*\): \(.*\)$/\\\\033[1m\1: \\\\033[0;92m\2\\\\033[0m/' "${HOME}"/.config/zsh/tips | shuf -n1 | xargs -I % printf "%\n"
 
 # setup vi keybindings
 set -o vi
