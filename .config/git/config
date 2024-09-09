@@ -1,6 +1,6 @@
 # This is Git's per-user configuration file.
 [user]
-# This is set in ~/.config/git/.gitconfig_local as spesified in https://stackoverflow.com/questions/42553685/setting-git-username-and-email-without-using-gitconfig
+# This is set in ~/.config/git/gitconfig_local as spesified in https://stackoverflow.com/questions/42553685/setting-git-username-and-email-without-using-gitconfig
 # Be sure to add 1Password keys to gitconfig_local in the future
 [include]
     path = ~/.config/git/config_local
