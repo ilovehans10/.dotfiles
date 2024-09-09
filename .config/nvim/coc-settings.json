@@ -29,8 +29,6 @@
   },
   "Lua.workspace.library": [ "/usr/local/share/nvim/runtime/lua", "/usr/local/share/nvim/runtime/lua/vim", "/usr/local/share/nvim/runtime/lua/vim/lsp" ],
   "Lua.diagnostics.globals": ["vim"],
-  "rust-analyzer.diagnostics.disabled": ["unresolved-proc-macro"],
-  "rust-analyzer.procMacro.enable": false,
   "rust-analyzer.updates.prompt": false,
   "rust-analyzer.checkOnSave": true,
   "rust-analyzer.check.command": "clippy",
