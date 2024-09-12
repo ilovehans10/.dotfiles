@@ -437,4 +437,11 @@ require("lazy").setup({
             }))
         end,
     },
+    {
+        "rust-lang/rust.vim",
+        event = "VeryLazy",
+        config = function()
+            vim.g.rustfmt_autosave = 1
+        end
+    },
 })
