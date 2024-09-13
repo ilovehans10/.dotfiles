@@ -65,6 +65,7 @@ keyset("t", "<C-h>", "<C-\\><C-N><C-w>h")
 keyset("t", "<C-j>", "<C-\\><C-N><C-w>j")
 keyset("t", "<C-k>", "<C-\\><C-N><C-w>k")
 keyset("t", "<C-l>", "<C-\\><C-N><C-w>l")
+keyset("t", "<S-space>", "<space>")
 
 keyset("n", "<ESC><ESC>", ":update<CR>")
 keyset("i", "jk", "<ESC>")
