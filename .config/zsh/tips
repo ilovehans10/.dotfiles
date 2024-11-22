@@ -28,6 +28,7 @@ the tabs of a file can be converted to tabstop with: :retab
 to put all yanked text into the clipboard: :set clipboard=unnamed
 open buffer in new tab: :tab sb FILENAME
 non greedy regex: :s/.\{-}/
+vim magic substitue by default: :sm/
 
 # relating to tips
 add tip: addtip TIP
