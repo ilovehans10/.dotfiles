@@ -27,6 +27,7 @@ the PARAMETER EXPANSION section of the zshexpn man page has substitutions that m
 the tabs of a file can be converted to tabstop with: :retab
 to put all yanked text into the clipboard: :set clipboard=unnamed
 open buffer in new tab: :tab sb FILENAME
+non greedy regex: :s/.\{-}/
 
 # relating to tips
 add tip: addtip TIP
