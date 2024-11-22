@@ -26,3 +26,5 @@
 	ff = only
 [init]
 	defaultBranch = master
+[merge]
+	conflictStyle = diff3
