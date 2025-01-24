@@ -180,6 +180,13 @@ zplug "b4b4r07/zsh-vimode-visual", defer:3
 
 zplug load
 
+# Add fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
+
+# Add zoxide bindings and features
+eval "$(zoxide init zsh)"
+
 source ~/.config/zsh/bindings
 
 unset FRESHSHELL
