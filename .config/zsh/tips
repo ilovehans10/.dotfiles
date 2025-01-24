@@ -25,6 +25,11 @@ the PARAMETER EXPANSION section of the zshexpn man page has substitutions that m
 # https://stackoverflow.com/questions/8344699/how-to-repeat-the-last-part-of-a-previous-command
 echo the Nth element from last command (note !:0 is the script): echo !:N
 echo all but the 0th element from last command: echo !*
+use fzf to search for a file to edit with vim: vim <C-t>
+use fzf to search the command history for a command: <C-r>
+use fzf to search prior ssh connection options: ssh **<Tab>
+use fzf to search for a file to edit: vim **<Tab>
+use fzf to search processes to kill: kill **<Tab>
 
 # vim specific
 the tabs of a file can be converted to tabstop with: :retab
