@@ -37,6 +37,7 @@ to put all yanked text into the clipboard: :set clipboard=unnamed
 open buffer in new tab: :tab sb FILENAME
 non greedy regex: :s/.\{-}/
 vim magic substitue by default: :sm/
+get a wordcount: g<C-g>
 
 # relating to tips
 add tip: addtip TIP
