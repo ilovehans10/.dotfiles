@@ -28,3 +28,5 @@
 	defaultBranch = master
 [merge]
 	conflictStyle = diff3
+[alias]
+	root = rev-parse --show-toplevel
