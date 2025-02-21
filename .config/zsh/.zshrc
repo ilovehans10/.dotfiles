@@ -133,6 +133,9 @@ timezsh() {
   shell=${1-$SHELL}
   for _ in $(seq 1 10); do /usr/bin/time -p "$shell" -i -c exit; done
 }
+rgl() {
+    rg --color=always $@ | less
+}
 
 # plugins
 plugins=(
