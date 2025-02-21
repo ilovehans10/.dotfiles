@@ -30,6 +30,11 @@ use fzf to search the command history for a command: <C-r>
 use fzf to search prior ssh connection options: ssh **<Tab>
 use fzf to search for a file to edit: vim **<Tab>
 use fzf to search processes to kill: kill **<Tab>
+get ssh keys for user: curl https://github.com/username.keys
+
+#git specific
+cd to top level of get repo: cd $(git rev-parse --show-toplevel)
+run git command without pager: git -P diff
 
 # vim specific
 the tabs of a file can be converted to tabstop with: :retab
@@ -38,6 +43,9 @@ open buffer in new tab: :tab sb FILENAME
 non greedy regex: :s/.\{-}/
 vim magic substitue by default: :sm/
 get a wordcount: g<C-g>
+
+# nix specific
+to build a configuration and then make it your default: nixos-rebuild switch
 
 # relating to tips
 add tip: addtip TIP
