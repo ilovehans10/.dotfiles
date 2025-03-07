@@ -37,6 +37,21 @@ list the most used zsh commnads: zsh_stats
 cd to top level of get repo: cd $(git rev-parse --show-toplevel)
 run git command without pager: git -P diff
 
+# tmux specific
+# IMPORTANT NOTE: I have my prefix rebound to <C-Space>, with no config the prefix is <C-b>
+start a tmux session with the name FOO: tmux new -s FOO
+[c]reate a new tmux window: <C-Space>c
+[d]isconnect from the current tmux session: <C-Space>d
+list all tmux [w]indows: <C-Space>w
+go to the [n]ext tmux window: <C-Space>n
+go to the [p]revoius tmux window: <C-Space>p
+go to the ([o]ther) next tmux pane: <C-Space>o
+to go to the Nth window when N is a number: <C-Space>N
+close the current window: <C-Space>&
+close the current pane: <C-Space>x
+toggle pane layout: <C-Space><Space>
+to view the tmux keybindings: <C-Space>?
+
 # vim specific
 the tabs of a file can be converted to tabstop with: :retab
 to put all yanked text into the clipboard: :set clipboard=unnamed
