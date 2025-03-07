@@ -171,6 +171,10 @@ case $OS in
     alias ls="ls --color=always -h --group-directories-first";;
 esac
 
+if [ ! -d "${XDG_CONFIG_HOME:-~/.config}"/tmux/plugins/tpm ]; then
+  git clone https://github.com/tmux-plugins/tpm "${XDG_CONFIG_HOME:-~/.config}"/tmux/plugins/tpm
+fi
+
 if [ ! -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]; then
   git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
 fi
