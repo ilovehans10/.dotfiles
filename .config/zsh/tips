@@ -39,7 +39,7 @@ run git command without pager: git -P diff
 
 # tmux specific
 # IMPORTANT NOTE: I have my prefix rebound to <C-Space>, with no config the prefix is <C-b>
-start a tmux session with the name FOO: tmux new -s FOO
+start a tmux session or attach to already created session with the name FOO: tmux new -A FOO
 [c]reate a new tmux window: <C-Space>c
 [d]isconnect from the current tmux session: <C-Space>d
 list all tmux [w]indows: <C-Space>w
