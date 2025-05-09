@@ -54,6 +54,7 @@ export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/inputrc"
 export KODI_DATA="${XDG_DATA_HOME:-$HOME/.local/share}/kodi"
 export LESSHISTFILE="-"
 export NOTMUCH_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/notmuch-config"
+export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export PASSWORD_STORE_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/password-store"
 export RUSTUP_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/rustup"
 export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
