@@ -65,6 +65,8 @@ alias rsync="noglob rsync --exclude-from=$HOME/.config/git/gitignore"
 alias mvr="rsync -Ph"
 # source https://askubuntu.com/questions/22037/aliases-not-available-when-using-sudo
 alias sudo="sudo "
+alias cat="bat"
+alias cd="z"
 
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias recentminecraft="grep \"lastLaunchTime\" .local/share/multimc/instances/*/instance.cfg | sed -En \"s/^.*instances\/(.*)\/instance.*lastLaunchTime=(.*)/\2 \1/p\" | sort -r | head -n 1 | sed -En \"s/[0-9]* //p\" | xargs multimc --launch && disown"
