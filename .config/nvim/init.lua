@@ -153,7 +153,17 @@ require("lazy").setup({
         end,
     },
     {
-        "airblade/vim-gitgutter", -- show git information in the left gutter
+        'echasnovski/mini.nvim', -- show git information in the left gutter
+        version = '*',
+        event = "VeryLazy",
+        config = function()
+            require("mini.diff").setup(
+                { view = {
+                        style = "sign",
+                        signs = { add = '+', change = '~', delete = '-' },
+                }, }
+            )
+        end,
     },
     {
         "preservim/vim-indent-guides", -- color codes indentation levels
