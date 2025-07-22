@@ -27,8 +27,8 @@ option.timeout = true -- don't wait forever for keys that are part of remaps
 option.timeoutlen = 1000 -- wait for 1 second for the next key in a remap
 option.ttimeoutlen = 100 -- wait for .1 seconds for key escape codes to be typed eg. <Right> = ^[[C
 option.expandtab = true -- expand tabs into spaces
-option.tabstop = 4 -- number of spaces tab counts for
-option.shiftwidth = 4 -- number of spaces to put in place of a tab
+option.tabstop = 2 -- number of spaces tab counts for
+option.shiftwidth = 0 -- makes shiftwidth match tabstop
 option.scrolloff = 5 -- number of lines to keep the cursor from the edges
 option.linebreak = true -- makes long lines wrap at characters in breakat
 option.mouse = "a" -- allow for all mouse functionality
