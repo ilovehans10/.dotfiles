@@ -256,7 +256,7 @@ require("lazy").setup({
         build = ":TSUpdate",
         config = function()
             require('nvim-treesitter.configs').setup {
-                ensure_installed = {"c_sharp", "lua", "nix", "rust", "vimdoc"},
+                ensure_installed = {"bash", "c_sharp", "lua", "nix", "rust", "vimdoc"},
                 highlight = {
                     enable = true,
                 },
