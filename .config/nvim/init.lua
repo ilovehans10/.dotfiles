@@ -18,6 +18,7 @@ option.foldnestmax = 3
 option.foldenable = false
 option.cursorline = true -- highlight the cursorline based on cursorlineopt
 option.cursorlineopt = "number" -- highlight the linenumber of the cursorline
+option.completeopt = {"menu", "menuone", "noselect"} -- show selection menus
 option.encoding = "utf-8" -- set default file encoding
 option.backspace = {"indent","eol","start"} -- enable all backspacing in insert mode
 option.relativenumber = true -- show the line numbers relative to the cursor
