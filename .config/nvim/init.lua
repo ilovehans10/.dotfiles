@@ -872,24 +872,6 @@ require("lazy").setup({
 			vim.g.undotree_WindowLayout = 3
 		end,
 	},
-	--[[{
-		"gelguy/wilder.nvim", -- add better commandline/searchline completion
-		event = "VeryLazy",
-		config = function()
-			local wilder = require("wilder")
-			wilder.setup({
-				modes = { ":", "/", "?" },
-			})
-			wilder.set_option(
-				"renderer",
-				wilder.popupmenu_renderer({
-					highlighter = wilder.basic_highlighter(),
-					left = { " ", wilder.popupmenu_devicons() },
-					right = { " ", wilder.popupmenu_scrollbar() },
-				})
-			)
-		end,
-	},]]
 	{
 		"rust-lang/rust.vim",
 		event = "VeryLazy",
