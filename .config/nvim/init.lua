@@ -162,6 +162,7 @@ require("lazy").setup({
 					signs = { add = "+", change = "~", delete = "-" },
 				},
 			})
+			require("mini.pairs").setup()
 			require("mini.indentscope").setup()
 			require("mini.surround").setup()
 			require("mini.jump2d").setup()
@@ -760,23 +761,6 @@ require("lazy").setup({
 					},
 				},
 			})
-		end,
-	},
-	{
-		"tmsvg/pear-tree", -- add functionality to automatically place closing symbol
-		event = "VeryLazy",
-		config = function()
-			-- disable automatic mapping
-			vim.g.pear_tree_map_special_keys = 0
-
-			--mappings
-			keyset("i", "<BS>", "<Plug>(PearTreeBackspace)")
-			keyset("i", "<Esc>", "<Plug>(PearTreeFinishExpansion)")
-
-			-- Smart pairs are disabled by default:
-			vim.g.pear_tree_smart_openers = 1
-			vim.g.pear_tree_smart_closers = 1
-			vim.g.pear_tree_smart_backspace = 1
 		end,
 	},
 	{
