@@ -162,12 +162,7 @@ require("lazy").setup({
 					signs = { add = "+", change = "~", delete = "-" },
 				},
 			})
-		end,
-	},
-	{
-		"preservim/vim-indent-guides", -- color codes indentation levels
-		config = function()
-			vim.g.indent_guides_enable_on_vim_startup = 1
+			require("mini.indentscope").setup()
 		end,
 	},
 	{
