@@ -152,15 +152,6 @@ require("lazy").setup({
 		end,
 	},
 	{
-		"wfxr/minimap.vim",
-		build = "cargo install --locked code-minimap",
-		config = function()
-			vim.g.minimap_width = 10
-			vim.g.minimap_auto_start = 1
-			vim.g.minimap_auto_start_win_enter = 1
-		end,
-	},
-	{
 		"echasnovski/mini.nvim", -- show git information in the left gutter
 		version = "*",
 		event = "VeryLazy",
