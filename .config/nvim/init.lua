@@ -163,6 +163,7 @@ require("lazy").setup({
 				},
 			})
 			require("mini.indentscope").setup()
+			require("mini.jump2d").setup()
 		end,
 	},
 	{
@@ -181,10 +182,6 @@ require("lazy").setup({
 			{ "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
 			{ "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
 		},
-	},
-	{
-		"easymotion/vim-easymotion", -- easymotion allows for smarter movement
-		event = "VeryLazy",
 	},
 	{
 		"tpope/vim-surround",
