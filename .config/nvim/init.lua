@@ -162,6 +162,9 @@ require("lazy").setup({
 					signs = { add = "+", change = "~", delete = "-" },
 				},
 			})
+			require("mini.jump").setup({
+				delay = { idle_stop = 10000 },
+			})
 			require("mini.pairs").setup()
 			require("mini.indentscope").setup()
 			require("mini.surround").setup()
