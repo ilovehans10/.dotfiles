@@ -652,14 +652,16 @@ require("lazy").setup({
 		--- @module 'blink.cmp'
 		--- @type blink.cmp.Config
 		opts = {
-			cmdline = { completion = { menu = { auto_show = true } } },
-			keymap = {
-				preset = "super-tab",
+			cmdline = {
+				completion = {
+					menu = { auto_show = true },
+					list = { selection = { preselect = false } },
+				},
 			},
-			appearance = {
-				nerd_font_variant = "mono",
-			},
+			keymap = { preset = "enter" },
+			appearance = { nerd_font_variant = "mono" },
 			completion = {
+				list = { selection = { preselect = false, auto_insert = true } },
 				-- By default, you may press `<c-space>` to show the documentation.
 				-- Optionally, set `auto_show = true` to show the documentation after a delay.
 				documentation = { auto_show = true, auto_show_delay_ms = 500 },
