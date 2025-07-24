@@ -163,6 +163,7 @@ require("lazy").setup({
 				},
 			})
 			require("mini.indentscope").setup()
+			require("mini.surround").setup()
 			require("mini.jump2d").setup()
 		end,
 	},
@@ -182,10 +183,6 @@ require("lazy").setup({
 			{ "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
 			{ "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
 		},
-	},
-	{
-		"tpope/vim-surround",
-		event = "VeryLazy",
 	},
 	{ -- Fuzzy Finder (files, lsp, etc)
 		"nvim-telescope/telescope.nvim",
