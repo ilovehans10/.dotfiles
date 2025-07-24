@@ -795,7 +795,7 @@ require("lazy").setup({
 					"filesystem",
 					"buffers",
 					"git_status",
-					-- "document_symbols", -- I would love to use this but it doesn't work with Coc https://github.com/nvim-neo-tree/neo-tree.nvim/issues/879
+					"document_symbols",
 				},
 				source_selector = {
 					winbar = true, -- toggle to show selector on winbar
@@ -806,7 +806,7 @@ require("lazy").setup({
 						{ source = "filesystem", display_name = "󰉓 Files" },
 						{ source = "buffers", display_name = "󰈙 Buffers" },
 						{ source = "git_status", display_name = " Git" },
-						-- { source = "document_symbols", display_name = " Symbols" },
+						{ source = "document_symbols", display_name = " Symbols" },
 					},
 				},
 			})
