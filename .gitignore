@@ -3,3 +3,4 @@
 .config/nvim/lazy-lock.json
 .config/ranger/__pycache__
 .zcompdump-*
+.config/git/config_local
