@@ -634,7 +634,11 @@ require("lazy").setup({
 					list = { selection = { preselect = false } },
 				},
 			},
-			keymap = { preset = "enter" },
+			keymap = {
+				preset = "enter",
+				["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+				["<S-Tab>"] = { "select_prev", "snippet_forward", "fallback" },
+			},
 			appearance = { nerd_font_variant = "mono" },
 			completion = {
 				list = { selection = { preselect = false, auto_insert = true } },
