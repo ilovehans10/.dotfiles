@@ -529,34 +529,46 @@ require("lazy").setup({
 				-- But for many setups, the LSP (`ts_ls`) will work just fine
 				-- ts_ls = {},
 				--
+			}
 
-				lua_ls = {
-					-- cmd = { ... },
-					-- filetypes = { ... },
-					-- capabilities = {},
-					settings = {
-						Lua = {
-							completion = {
-								callSnippet = "Replace",
-							},
-							workspace = {
-								library = {
-									"${workspaceFolder}",
-								},
-							},
-							-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-							-- diagnostics = { disable = { 'missing-fields' } },
+			local lua_ls_library = vim.api.nvim_get_runtime_file("", true)
+			table.insert(lua_ls_library, "${workspaceFolder}")
+
+			vim.lsp.config("lua_ls", {
+				cmd = { "lua-language-server" },
+				filetypes = { "lua" },
+				settings = {
+					Lua = {
+						completion = {
+							callSnippet = "Replace",
+						},
+						workspace = {
+							library = lua_ls_library,
+						},
+						diagnostics = {
+							globals = { "vim" },
+						},
+						runtime = {
+							version = "LuaJIT",
+						},
+						telemetry = {
+							enable = false,
 						},
 					},
 				},
-			}
+			})
+
+			vim.lsp.config("stylua", {
+				root_markers = { ".git" },
+			})
+
+			vim.lsp.enable({ "lua_ls", "stylua" })
+
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
-				"stylua", -- lua formatting
 				"eslint", -- javascript completions
 				"shellcheck", -- bash completions
 			})
-			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
 			require("mason-lspconfig").setup({
 				ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
