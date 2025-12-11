@@ -112,7 +112,7 @@ vim.api.nvim_create_autocmd("FocusLost", {
 vim.api.nvim_create_autocmd("FocusGained", {
 	pattern = "*",
 	group = "clipboardswapper",
-	command = [[ let @" = @+ ]],
+	command = [[ let @" = @+ | sleep 10m ]],
 })
 
 vim.api.nvim_create_augroup("myterm", {})
