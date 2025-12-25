@@ -562,7 +562,7 @@ require("lazy").setup({
 				root_markers = { ".git" },
 			})
 
-			vim.lsp.enable({ "lua_ls", "stylua" })
+			vim.lsp.enable({ "lua_ls", "stylua", "rust_analyzer" })
 
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
@@ -696,7 +696,7 @@ require("lazy").setup({
 		build = ":TSUpdate",
 		config = function()
 			require("nvim-treesitter.configs").setup({
-				ensure_installed = { "bash", "c_sharp", "lua", "nix", "rust", "vimdoc" },
+				ensure_installed = { "bash", "c_sharp", "lua", "nix", "vimdoc" },
 				highlight = {
 					enable = true,
 				},
