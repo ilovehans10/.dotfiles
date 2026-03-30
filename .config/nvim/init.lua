@@ -563,6 +563,16 @@ require("lazy").setup({
 				root_markers = { ".git" },
 			})
 
+			vim.lsp.config("rust_analyzer", {
+				settings = {
+					["rust-analyzer"] = {
+						check = {
+							command = "clippy",
+						},
+					},
+				},
+			})
+
 			vim.lsp.enable({ "lua_ls", "stylua", "rust_analyzer" })
 
 			local ensure_installed = vim.tbl_keys(servers or {})
