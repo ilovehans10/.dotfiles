@@ -321,12 +321,10 @@ require("lazy").setup({
 		-- Main LSP Configuration
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			-- Automatically install LSPs and related tools to stdpath for Neovim
-			-- Mason must be loaded before its dependents so we need to set it up here.
-			-- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
+			-- Mason: used for quickly installing LSPs to test before managing with Nix.
 			{ "mason-org/mason.nvim", opts = {} },
+			-- Automatically enables all Mason-installed LSP servers via vim.lsp.enable().
 			"mason-org/mason-lspconfig.nvim",
-			"WhoIsSethDaniel/mason-tool-installer.nvim",
 
 			-- Useful status updates for LSP.
 			{ "j-hui/fidget.nvim", opts = {} },
@@ -506,31 +504,13 @@ require("lazy").setup({
 				},
 			})
 
-			local capabilities = require("blink.cmp").get_lsp_capabilities()
+			-- Apply blink.cmp capabilities to all LSP servers globally.
+			vim.lsp.config("*", {
+				capabilities = require("blink.cmp").get_lsp_capabilities(),
+			})
 
-			-- Enable the following language servers
-			--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-			--
-			--  Add any additional override configuration in the following tables. Available keys are:
-			--  - cmd (table): Override the default command used to start the server
-			--  - filetypes (table): Override the default list of associated filetypes for the server
-			--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-			--  - settings (table): Override the default settings passed when initializing the server.
-			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-			local servers = {
-				-- clangd = {},
-				-- gopls = {},
-				-- pyright = {},
-				-- rust_analyzer = {},
-				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-				--
-				-- Some languages (like typescript) have entire language plugins that can be useful:
-				--    https://github.com/pmizio/typescript-tools.nvim
-				--
-				-- But for many setups, the LSP (`ts_ls`) will work just fine
-				-- ts_ls = {},
-				--
-			}
+			-- Automatically enable all Mason installed LSP servers.
+			require("mason-lspconfig").setup({ automatic_enable = true })
 
 			local lua_ls_library = vim.api.nvim_get_runtime_file("", true)
 			table.insert(lua_ls_library, "${workspaceFolder}")
@@ -559,10 +539,6 @@ require("lazy").setup({
 				},
 			})
 
-			vim.lsp.config("stylua", {
-				root_markers = { ".git" },
-			})
-
 			vim.lsp.config("rust_analyzer", {
 				settings = {
 					["rust-analyzer"] = {
@@ -573,28 +549,8 @@ require("lazy").setup({
 				},
 			})
 
-			vim.lsp.enable({ "lua_ls", "stylua", "rust_analyzer" })
-
-			local ensure_installed = vim.tbl_keys(servers or {})
-			vim.list_extend(ensure_installed, {
-				"eslint", -- javascript completions
-				"shellcheck", -- bash completions
-			})
-
-			require("mason-lspconfig").setup({
-				ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-				automatic_installation = false,
-				handlers = {
-					function(server_name)
-						local server = servers[server_name] or {}
-						-- This handles overriding only values explicitly passed
-						-- by the server configuration above. Useful when disabling
-						-- certain features of an LSP (for example, turning off formatting for ts_ls)
-						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-						require("lspconfig")[server_name].setup(server)
-					end,
-				},
-			})
+			-- Servers managed by Nix (or any other means that puts the binary on PATH).
+			vim.lsp.enable({ "lua_ls", "rust_analyzer" })
 		end,
 	},
 
