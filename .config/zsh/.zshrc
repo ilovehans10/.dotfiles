@@ -144,6 +144,7 @@ plugins=(
   archlinux
   copyfile
   copypath
+  docker
   git
   history-substring-search
   hitchhiker
