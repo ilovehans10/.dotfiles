@@ -14,6 +14,8 @@ fi
 # setup vi keybindings
 set -o vi
 
+source ~/.nix-profile/etc/profile.d/hm-session-vars.sh
+
 # oh-my-zsh/zplug setup
 zstyle ':omz:update' mode auto
 zstyle ':omz:update' frequency 10
